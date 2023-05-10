@@ -283,6 +283,21 @@ print(triple(3));
 
 
 
+var auteur2 = Realisateur('Besson', "Jean Luc", ["5eme element","Jean Darc"]);
+print(auteur2.toString());
+Materiel el1 = Materiel.newMat("Fer", EtatPhysique.solid);
+var el2 = Materiel.newMat("Mecure", EtatPhysique.liquid);
+var el3 = Materiel.newMat("Méthane", EtatPhysique.gazeux);
+var el4 = Materiel.newMat("Buthane", EtatPhysique.gazeux);
+
+print(Materiel.metaCount);
+
+var rectangle1 = Rectangle(10, 5);
+print(rectangle1.aire());
+print(rectangle1.perimetre());
+
+
+
 }
 
 var multiplication = (int a1, int b1) => a1 * b1;
@@ -341,4 +356,97 @@ double AireCercle(double rayon){
 
 double calculPerimetreRectangle(double longueur, double largeur){
   return 2 * (largeur+longueur);
+}
+
+// LIVE 6 
+// POO : programmation orientée objet
+// concept central dans le développement informarTIQU
+// OBJETS : Int, String, Bool, List, map
+// Voiture -  etudiant - une fenentre
+// voiture : volant - roues - carosserie - roule - demarer 
+
+// ----> class 
+
+
+class Realisateur {
+  String nom ="";
+  late String prenom = "";
+  var filmographie = <String>[];
+
+  Realisateur(this.nom, this.prenom, this.filmographie);
+
+ @override
+  String toString() {
+    // TODO: implement toString
+    var realisateur = "$nom $prenom";
+    for (var film in filmographie){
+      realisateur += '- $film';
+    }
+    return realisateur;
+
+
+  }
+  
+  void ajouterUnFilm(String nomDeFilm){
+    filmographie.add(nomDeFilm);
+  }
+
+}
+
+
+class Materiel {
+  late String nom;
+  late EtatPhysique etat;
+
+  // définition d'une variable static, elle va être partager par tous les objets
+  static int metaCount = 0;
+
+  Materiel._inter(this.nom, this.etat);
+
+  static Materiel newMat(String nom, EtatPhysique etat){
+    metaCount++;
+    return Materiel._inter(nom, etat);
+    
+  }
+
+
+}
+
+
+
+enum EtatPhysique {
+  gazeux,
+  solid,
+  liquid
+}
+
+
+/*
+Une Class Rectangle 
+2 propriétés : longueur, largeur
+- 1 constructor
+- 2 méthodes : périmiètre, aire 
+*/
+
+class Rectangle {
+  // propriétés 
+  int? longueur;
+  int? largeur;
+  // constructeur
+  Rectangle(this.longueur, this.largeur);
+
+  int aire(){
+    int surface = 0;
+    if (this.largeur != null && this.longueur !=null){
+      surface = this.largeur! * this.longueur!;
+    }
+    return surface;
+  }
+
+  int perimetre(){
+    return 2 * (this.largeur! + this.longueur!);
+  }
+
+
+
 }
