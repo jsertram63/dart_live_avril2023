@@ -1,8 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ffi';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dart_live_avril_mai2023_studi/dart_live_avril_mai2023_studi.dart' as dart_live_avril_mai2023_studi;
-import 'dart:io';
-import 'dart:ffi';
 
 // LIVE 2 
 /*
@@ -295,7 +296,24 @@ print(Materiel.metaCount);
 var rectangle1 = Rectangle(10, 5);
 print(rectangle1.aire());
 print(rectangle1.perimetre());
+print("------------------------------------------");
+print("-                   LIVE 7                -");
+print("------------------------------------------");
+Utilisateur utilisateur1 = Utilisateur(name: "Salomon", id:1);
+print(utilisateur1.toString());
 
+Personne perso = Personne("Julien");
+var guerrierSalomon = Guerrier("Salomon");
+var guerrierMathias = Guerrier("Mathias");
+guerrierSalomon.pointDeVie = 80;
+guerrierMathias.pointDeVie = 60;
+Magicien magicien =  Magicien("Julien", 80);
+magicien.pointDeVie = 60;
+guerrierMathias.Attaque(magicien);
+
+print(guerrierMathias.pointDeVie);
+
+//guerrierMathias.Attaque(guerrierSalomon);
 
 
 }
@@ -447,6 +465,63 @@ class Rectangle {
     return 2 * (this.largeur! + this.longueur!);
   }
 
+}
+
+// pour créer un objet on fait une class (mot clé) {}
+class Utilisateur {
+  int? id;
+  String? name;
+
+  Utilisateur({required String name, required int id}){
+    this.name = name;
+    this.id = id;
+  }
+
+  getName(){
+    return name;
+  }
+
+  @override
+  String toString(){
+    return '$id $name';
+  }
 
 
+
+}
+
+class Personne {
+  late String nom;
+  Personne(this.nom);
+}
+
+// l'héritiage avec le mot clé : extends 
+
+class Guerrier extends Personne {
+  int? pointDeVie;
+  Guerrier(
+   String nom
+  ) : super(nom);
+
+  Attaque(Guerrier guerrier){
+    print("point de vie salomon : ${guerrier.pointDeVie}");
+     print("point de vie Mathias : ${this.pointDeVie}");
+    if (this.pointDeVie! < guerrier.pointDeVie!){
+      print("Pas assez de points de vie pour affronter ce guerrier");
+      print("Sinon vous allez finir mort");
+    }else {
+      guerrier.pointDeVie = guerrier.pointDeVie! -20;
+      this.pointDeVie = this.pointDeVie! + 20;
+      print("${nom} a gagné");
+    }
+  }
+  
+
+}
+
+class Magicien extends Guerrier {
+  int? mana;
+  Magicien(String nom, int mana) :super(nom){ this.mana = mana;}
+  
+  
 }
